@@ -90,29 +90,64 @@ public class PlayerUIGroup : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Changes the color of the player icon
+    /// </summary>
+    /// <param name="color"></param>
     public void SetPlayerColor(Color color)
     {
         playerIcon.PlayerColor = color;
     }
     
-    public void UpdateAttackIcon(bool isAvailable, float fillAmount)
+    /// <summary>
+    /// Updates Availability of the attack icon. If fill amount is included, it will also update the fill
+    /// amount of the level up icon
+    /// </summary>
+    /// <param name="isAvailable"></param>
+    /// <param name="fillAmount"></param>
+    public void UpdateAttackIcon(bool isAvailable, float fillAmount = -1)
     {
         attackIcon.IsAvailable = isAvailable;
+        
+        if (fillAmount <= -1) return;
+        
         attackLevelUpIcon.SetFillAmount(fillAmount);
     }
     
-    public void UpdateFlyIcon(bool isAvailable, float fillAmount)
+    /// <summary>
+    /// Updates Availability of the fly icon. If fill amount is included, it will also update the fill
+    /// amount of the level up icon
+    /// </summary>
+    /// <param name="isAvailable"></param>
+    /// <param name="fillAmount"></param>
+    public void UpdateFlyIcon(bool isAvailable, float fillAmount = -1)
     {
         flyIcon.IsAvailable = isAvailable;
+        
+        if (fillAmount <= -1) return;
+        
         flyLevelUpIcon.SetFillAmount(fillAmount);
     }
     
-    public void UpdateRunIcon(bool isAvailable, float fillAmount)
+    /// <summary>
+    /// Updates Availability of the run icon. If fill amount is included, it will also update the fill
+    /// amount of the level up icon
+    /// </summary>
+    /// <param name="isAvailable"></param>
+    /// <param name="fillAmount"></param>
+    public void UpdateRunIcon(bool isAvailable, float fillAmount = -1)
     {
         runIcon.IsAvailable = isAvailable;
+        
+        if (fillAmount <= -1) return;
+        
         runLevelUpIcon.SetFillAmount(fillAmount);
     }
     
+    /// <summary>
+    /// Updates the fill amount of the stamina icon
+    /// </summary>
+    /// <param name="fillAmount"></param>
     public void UpdateStaminaIcon(float fillAmount)
     {
         staminaIcon.SetFillAmount(fillAmount);
