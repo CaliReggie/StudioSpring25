@@ -146,18 +146,8 @@ public class PlayerController : MonoBehaviour
         // Input system
         _jumpAction = _input.actions["Jump"];
         _jumpAction.performed += OnJump;
-        _abilityAction = _input.actions["action"];
-        _abilityAction.performed += OnExecuteMove;
-        
-        /*_switchChar1 = _input.actions["switchChar1"];
-        _switchChar2 = _input.actions["switchChar2"];
-        _switchChar3 = _input.actions["switchChar3"];
-        _switchChar4 = _input.actions["switchChar4"];
-
-        _switchChar1.performed += OnSwitchChar1;
-        _switchChar2.performed += OnSwitchChar2;
-        _switchChar3.performed += OnSwitchChar3;
-        _switchChar4.performed += OnSwitchChar4;*/
+        /*_abilityAction = _input.actions["action"];
+        _abilityAction.performed += OnExecuteMove;*/
         
         _moveAction = _input.actions["Move"];
         _moveAction.started += OnMovement;
@@ -167,7 +157,7 @@ public class PlayerController : MonoBehaviour
         _health.OnDespawn += OnDespawn;
         //_health.OnRespawn += OnRespawn;
 
-        _togglePause = _input.actions["pausing"];
+        //_togglePause = _input.actions["pausing"];
         //_togglePause.performed += OnPressingPause;
     }
     
@@ -205,11 +195,6 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         _jumpAction.performed -= OnJump;
-        _abilityAction.performed -= OnExecuteMove;
-        /*_switchChar1.performed -= OnSwitchChar1;
-        _switchChar2.performed -= OnSwitchChar2;
-        _switchChar3.performed -= OnSwitchChar3;
-        _switchChar4.performed -= OnSwitchChar4;*/
         _moveAction.started -= OnMovement;
         _moveAction.canceled -= OnMovement;
         _health.OnTakeDamage -= OnTakeDamage;
@@ -226,35 +211,8 @@ public class PlayerController : MonoBehaviour
     void OnMovement(InputAction.CallbackContext context)
     {
         if (animating) return;
-        //Debug.Log("Moving at Direction: " + context.ReadValue<Vector2>());
+        Debug.Log("Moving at Direction: " + context.ReadValue<Vector2>());
         hDirection = (int)context.ReadValue<Vector2>().x;
-    }
-    
-    void OnSwitchChar1(InputAction.CallbackContext context)
-    {
-        if (animating) return;
-        StartCoroutine(SwitchCharacter(0));
-    }
-    
-    void OnSwitchChar2(InputAction.CallbackContext context)
-    {
-        if (animating) return;
-
-        StartCoroutine(SwitchCharacter(1));
-    }
-    
-    void OnSwitchChar3(InputAction.CallbackContext context)
-    {
-        if (animating) return;
-
-        StartCoroutine(SwitchCharacter(2));
-    }
-    
-    void OnSwitchChar4(InputAction.CallbackContext context)
-    {
-        if (animating) return;
-
-        StartCoroutine(SwitchCharacter(3));
     }
     
     void OnExecuteMove(InputAction.CallbackContext context)
@@ -499,7 +457,7 @@ public class PlayerController : MonoBehaviour
         }
 
         wishJump = false;
-        _activePlayerAction.ExecuteJump();
+        //_activePlayerAction.ExecuteJump();
         
         if(jumped == 1)
         {
@@ -566,41 +524,7 @@ public class PlayerController : MonoBehaviour
         direction = hDirection;
         transform.localScale = new Vector2(direction * 2, 2);  // forgive me
     }
-
-    private IEnumerator SwitchCharacter(int newCharID)
-    {
-        // Guard, if switching to the same character or switching to a character that doesn't exist
-        // then play the error sound and deny the switching
-        if (newCharID == activePlayerID || newCharID > 4)
-        {
-            Debug.Log("Not switching");
-            Debug.Log($"Active player: {activePlayerID.ToString()}\n" +
-                      $"Tried to switch to: ${newCharID.ToString()}");
-            //CancelSFX.PlaySound();
-            yield break; 
-        }
-        //SpawnSFX.PlaySound();
-        // Set state to be animated and stops any movement
-        // Preserve the movement
-        FreezeMovement();
-
-        // Set a time delay and animate the switching
-        _sAnim.SetTrigger("disappearing");
-        yield return new WaitForSeconds(.3f);
-        _sAnim.SetTrigger("appearing");
-        yield return new WaitForSeconds(.3f);
-
-        // After the time delay switch the character
-        _sLoader.ChangeCharacter(newCharID);
-        
-        // Clean up
-        TransitionToState(State.Idle);
-        PerformStateAction(); // Get the ball rolling again.
-        // Reset the previous variables
-        UnfreezeMovement();
-        
-        Debug.Log("Switching successful."); 
-    }
+    
     #endregion
 
     /// <summary>

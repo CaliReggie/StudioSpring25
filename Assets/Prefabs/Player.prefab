@@ -747,7 +747,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f56fe661c2c4f404abac70f858de45a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PinkID: 0
 --- !u!1 &5482475925590813503
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,6 +982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b040c139090c3e04f9e6d2d07f42213f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 2
   onGround: 0
   animating: 0
   direction: 0
@@ -994,16 +994,15 @@ MonoBehaviour:
     djmpHeight: 0
     jmpGravScale: 0
     animOverride: {fileID: 0}
-  walkSpeed: 0
+  wishVel_x: 0
   fallScale: 2.5
-  txtState: {fileID: 0}
-  txtJumped: {fileID: 0}
-  txtHangtimeCountdown: {fileID: 0}
-  txtHDirection: {fileID: 0}
   timeToStopGroundCheck: 5
   jmpGravScale: 0.07
   hangTime: 10
   decelAmount: 0.035
+  accel_x: 0
+  minimumRunSpeed: 0
+  wishJumpExpirationDuration: 0
   hitStunTime: 0.5
   hitStunForce: 5
   hDirection: 0

@@ -8,4 +8,20 @@ AnimatorOverrideController:
   m_PrefabAsset: {fileID: 0}
   m_Name: PinkAnimOverride
   m_Controller: {fileID: 9100000, guid: 417d7dde7b6b79c4296fa2f288e76c1c, type: 2}
-  m_Clips: []
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: e2afab8f09c2e3b42ae1802dfe546e29, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e2afab8f09c2e3b42ae1802dfe546e29, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e6a35daaa3116ab4bb0ee0f6ff8285a5, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e6a35daaa3116ab4bb0ee0f6ff8285a5, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 5d9311bcf73608b4eaa4015361f47ec0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5d9311bcf73608b4eaa4015361f47ec0, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 6540ecaa694f09a4e94a77bc62c1965b, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6540ecaa694f09a4e94a77bc62c1965b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 3ec06865b7397fb4cae528b7affd2062, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3ec06865b7397fb4cae528b7affd2062, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: dcdc1121e4d912944b1ecfd112efd59c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: dcdc1121e4d912944b1ecfd112efd59c, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d661f572d4892c441ba067bf30a850d8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d661f572d4892c441ba067bf30a850d8, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 0cd25d124847593449e17104b59c3602, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 0cd25d124847593449e17104b59c3602, type: 2}
