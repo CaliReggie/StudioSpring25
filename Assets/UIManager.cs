@@ -97,6 +97,7 @@ public class UIManager : MonoBehaviour
     
     private void Update()
     {
+        //all of this is debug, can be removed once the game is working, simply demonstrating how to use the UIManager
         if (addPlayerUIGroups)
         {
             addPlayerUIGroups = false;
