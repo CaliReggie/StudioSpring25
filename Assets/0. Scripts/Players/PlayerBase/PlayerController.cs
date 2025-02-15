@@ -35,11 +35,11 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// If the player is on the ground or nah
     /// </summary>
-    public bool onGround;
+    [HideInInspector] public bool onGround;
     /// <summary>
     /// If the player is currently animating
     /// </summary>
-    public bool animating;
+    [HideInInspector] public bool animating;
     /// <summary>
     /// Timer to check whether to stop checking the player if they are on the ground
     /// </summary>
@@ -68,18 +68,12 @@ public class PlayerController : MonoBehaviour
     [Header("Player's properties")]
     public PlayerStats _playerStats;
 
-    public float wishVel_x;
+    [HideInInspector] public float wishVel_x;
     private int jmpLimit;
     private int jmpHeight;
     private int djmpHeight;
 
     [SerializeField] private float fallScale = 2.5f;
-    
-    /*[Header("Debug Texts")]
-    [SerializeField] private TMP_Text txtState;
-    [SerializeField] private TMP_Text txtJumped;
-    [SerializeField] private TMP_Text txtHangtimeCountdown;
-    [SerializeField] private TMP_Text txtHDirection;*/
 
     [Header("Polish")] 
     [SerializeField] private int timeToStopGroundCheck;
@@ -95,7 +89,7 @@ public class PlayerController : MonoBehaviour
     public float hitStunForce = 10f;
 
     // Key input
-    public int hDirection;
+    [HideInInspector] public int hDirection;
     
     // Other script
     private Collision _sColl; 
@@ -104,7 +98,7 @@ public class PlayerController : MonoBehaviour
     
     // Active players
     private GameObject _activePlayer;
-    public int activePlayerID;
+    [HideInInspector] public int activePlayerID;
     private IPlayerAction _activePlayerAction;
 
     public Action OnGrounded;
@@ -117,7 +111,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlaySoundOnce JumpSFX;
     [SerializeField] private PlaySoundOnce DjumpSFX;
     [SerializeField] private PlaySoundOnce CancelSFX;
-    [SerializeField] private int FrogID;
 
     private bool wishJump;
     private float wishJumpExpiration;
