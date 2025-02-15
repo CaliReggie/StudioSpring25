@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 
-public class Player : MonoBehaviour
+public class Player_shem : MonoBehaviour
 {
 
     [Header("Inscribed")]
