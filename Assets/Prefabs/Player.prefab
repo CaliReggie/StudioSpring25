@@ -822,7 +822,6 @@ GameObject:
   - component: {fileID: 5482475926532644457}
   - component: {fileID: 5482475926532644463}
   - component: {fileID: 5482475926532644456}
-  - component: {fileID: 378569972}
   - component: {fileID: 5482475925974942879}
   - component: {fileID: 5482475925974942887}
   - component: {fileID: 4558002667702161525}
@@ -936,7 +935,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b040c139090c3e04f9e6d2d07f42213f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 2
   onGround: 0
   animating: 0
   direction: 0
@@ -954,18 +952,19 @@ MonoBehaviour:
   jmpGravScale: 0.07
   hangTime: 10
   decelAmount: 0.035
-  accel_x: 0
+  accel_x: 1
   minimumRunSpeed: 0
   wishJumpExpirationDuration: 0
   hitStunTime: 0.5
   hitStunForce: 5
   hDirection: 0
   activePlayerID: 0
+  PlayerStats: {fileID: 11400000, guid: dd6e56d3b3656a54780043ff2fec486b, type: 2}
+  PlayerID: 0
   SpawnSFX: {fileID: 6818920325410085571}
   JumpSFX: {fileID: 1659555986407976139}
   DjumpSFX: {fileID: 5099073102368023721}
   CancelSFX: {fileID: 4144579432316386045}
-  FrogID: 1
 --- !u!114 &5482475926532644456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -991,27 +990,6 @@ MonoBehaviour:
   leftOffset: {x: -0.67, y: 0}
   rightOffset: {x: 0.69, y: 0}
   collisionRadius: 0.19
---- !u!114 &378569972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5482475926532644464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c787204f32d37f428fa581a4b40e41c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curPlayerStats:
-    heroName: Pink
-    jmpLimit: 2
-    walkSpeed: 7
-    jmpHeight: 7
-    djmpHeight: 7
-    jmpGravScale: 0.75
-    animOverride: {fileID: 0}
-  characterList: {fileID: 11400000, guid: 5ed18ee17b17b8c489d7f55ed412df18, type: 2}
 --- !u!114 &5482475925974942879
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -127,11 +127,6 @@ public class PlayerController : MonoBehaviour
         stopGroundCheck = 0;
         hangTimeCountdown = hangTime;
         initGravScale = _rb.gravityScale;
-        /*// Check if the character has been loaded (usually yes)
-        if(_sLoader.Loaded) FetchPlayerFromLoader();
-        // Subscribe to loading event
-        // This is the key part to the switching characters feature.
-        _sLoader.OnLoaded += FetchPlayerFromLoader;*/
         
         FetchPlayer(PlayerStats);
         

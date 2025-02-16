@@ -69,6 +69,8 @@ namespace Scripts
         public void ChangeAnim(AnimatorOverrideController newAnim)
         {
             _animOverride = newAnim;
+            // terrible hack
+            if (!_anim) _anim = GetComponent<Animator>();
             _anim.runtimeAnimatorController = newAnim;
         }
         
