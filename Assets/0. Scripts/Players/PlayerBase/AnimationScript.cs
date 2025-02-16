@@ -20,14 +20,14 @@ namespace Scripts
         {
             _anim = GetComponent<Animator>();
             _sColl = GetComponentInParent<Collision>();
-            _sLoader = GetComponentInParent<PlayerLoader>();
+            //_sLoader = GetComponentInParent<PlayerLoader>();
             
             if (!_anim) Debug.LogWarning("AnimationScript: Missing Animator!");
             
             // Check if it has been loaded. If yes then then apply it now.
-            if(_sLoader.Loaded) ChangeAnim(_sLoader.curPlayerStats.animOverride);
+            //if(_sLoader.Loaded) ChangeAnim(_sLoader.curPlayerStats.animOverride);
             // Subscribe to event after it has been loaded.
-            _sLoader.OnLoaded += HandleEventLoaded; 
+            //_sLoader.OnLoaded += HandleEventLoaded; 
         }
         
         private void Update()

@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
          Idle, Walking, Spawning, OnAir
     }
 
-    [SerializeField] private State state = State.Spawning;
+    private State state = State.Spawning;
     // Other state
     /// <summary>
     /// How much have the player jumped
@@ -58,10 +58,6 @@ public class PlayerController : MonoBehaviour
     
     private InputAction _jumpAction;
     private InputAction _abilityAction;
-    private InputAction _switchChar1;
-    private InputAction _switchChar2;
-    private InputAction _switchChar3;
-    private InputAction _switchChar4;
     private InputAction _moveAction;
     private InputAction _togglePause;
     
@@ -100,7 +96,9 @@ public class PlayerController : MonoBehaviour
     private GameObject _activePlayer;
     [HideInInspector] public int activePlayerID;
     private IPlayerAction _activePlayerAction;
-
+    [SerializeField] private PlayerScriptableObject PlayerStats;
+    
+    public int PlayerID;
     public Action OnGrounded;
     private bool _isGrounded;
     public Action OnFirstJump;
@@ -121,7 +119,6 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _col = GetComponent<CapsuleCollider2D>();
         _input = GetComponent<PlayerInput>();
-        //_col = GetComponent<BoxCollider2D>();
         _sColl = GetComponent<Collision>();
         _sAnim = GetComponentInChildren<AnimationScript>();
         _sLoader = GetComponent<PlayerLoader>();
@@ -130,17 +127,19 @@ public class PlayerController : MonoBehaviour
         stopGroundCheck = 0;
         hangTimeCountdown = hangTime;
         initGravScale = _rb.gravityScale;
-        // Check if the character has been loaded (usually yes)
+        /*// Check if the character has been loaded (usually yes)
         if(_sLoader.Loaded) FetchPlayerFromLoader();
         // Subscribe to loading event
         // This is the key part to the switching characters feature.
-        _sLoader.OnLoaded += FetchPlayerFromLoader;
+        _sLoader.OnLoaded += FetchPlayerFromLoader;*/
+        
+        FetchPlayer(PlayerStats);
         
         // Input system
         _jumpAction = _input.actions["Jump"];
         _jumpAction.performed += OnJump;
-        /*_abilityAction = _input.actions["action"];
-        _abilityAction.performed += OnExecuteMove;*/
+        _abilityAction = _input.actions["Interact"];
+        _abilityAction.performed += OnExecuteMove;
         
         _moveAction = _input.actions["Move"];
         _moveAction.started += OnMovement;
@@ -194,7 +193,7 @@ public class PlayerController : MonoBehaviour
         _health.OnDespawn -= OnDespawn;
        // _health.OnRespawn -= OnRespawn;
         
-        _sLoader.OnLoaded -= FetchPlayerFromLoader;
+        //_sLoader.OnLoaded -= FetchPlayerFromLoader;
         //_togglePause.performed -= OnPressingPause;
     }
     
@@ -204,7 +203,7 @@ public class PlayerController : MonoBehaviour
     void OnMovement(InputAction.CallbackContext context)
     {
         if (animating) return;
-        Debug.Log("Moving at Direction: " + context.ReadValue<Vector2>());
+        //Debug.Log("Moving at Direction: " + context.ReadValue<Vector2>());
         hDirection = (int)context.ReadValue<Vector2>().x;
     }
     
@@ -286,35 +285,23 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    ///  Fetch the player from the loader
-    ///  And apply the stats to the current player
+    ///  Fetch and apply the stats from the scriptable object
     /// </summary>
-    void FetchPlayerFromLoader()
-    {
-        _activePlayer = _sLoader.curCharacter;
-        activePlayerID = _sLoader.curCharacterID;
-        _activePlayerAction = _activePlayer.GetComponent<IPlayerAction>();
 
-        // Deep copy for ease of prototyping
-        // Though I'm not sure if this is a wasteful use of memory...
-        // TODO: Check if this is a good idea and how C# handles this
-        _playerStats = _sLoader.curPlayerStats.clone();
-        
-        //_playerStats = _sLoader.curPlayerStats;
-        
-        jmpLimit = _playerStats.jmpLimit;
-        wishVel_x = _playerStats.walkSpeed;
-        jmpHeight = _playerStats.jmpHeight;
-        djmpHeight = _playerStats.djmpHeight;
-        jmpGravScale = _playerStats.jmpGravScale;
-        
+    void FetchPlayer(PlayerScriptableObject Stats)
+    {
+        jmpLimit = Stats.PlayerStats.jmpLimit;
+        wishVel_x = Stats.PlayerStats.walkSpeed;
+        jmpHeight = Stats.PlayerStats.jmpHeight;
+        djmpHeight = Stats.PlayerStats.djmpHeight;
+        jmpGravScale = Stats.PlayerStats.jmpGravScale;
+        _sAnim.ChangeAnim(Stats.PlayerStats.animOverride);
         Debug.Log("Stats: " +
                   "jmpLimit: " + jmpLimit + "\n" +
                   "wishVel_x: " + wishVel_x + "\n" +
                   "jmpHeight: " + jmpHeight + "\n"
-                  );
+        );
     }
-    
     /// <summary>
     ///  Manage state transitions
     /// </summary>
@@ -374,7 +361,9 @@ public class PlayerController : MonoBehaviour
     public void ExecuteMove()
     {
         // Execute the action from the current character
-        _activePlayerAction.ExecuteMove();
+        //_activePlayerAction.ExecuteMove();
+        
+        UIManager.Instance.PlayerUIGroups[PlayerID].UpdateStaminaIcon(0);
         
         // clean up here
         Debug.Log("PlayerController: Clean up exectuted");
@@ -467,7 +456,7 @@ public class PlayerController : MonoBehaviour
             _sAnim.SetTrigger("jumped");
             OnFirstJump?.Invoke();
         }
-        Debug.Log("jumped");
+        //Debug.Log("jumped");
         jumped++;
         _sAnim.SetBool("falling", false);
         _rb.gravityScale *= jmpGravScale;
