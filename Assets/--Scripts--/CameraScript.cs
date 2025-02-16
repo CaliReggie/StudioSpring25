@@ -8,8 +8,7 @@ public class CameraScript : MonoBehaviour
     [Header("TargetPositions")]
     public Transform pos1;
     public Transform pos2;
-    Vector2 currentPosition;
-    Vector2 targetPosition;
+    Vector3 targetPosition;
     public float moveSpeed = 10f;
 
     public enum eCamState
@@ -38,11 +37,15 @@ public class CameraScript : MonoBehaviour
             case eCamState.MoveToPos1:
             targetPosition = pos1.position;
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetPosition.x,targetPosition.y,-10), moveSpeed*Time.deltaTime);
+            if (transform.position == targetPosition)
+            camState = eCamState.Static;
             break;
 
             case eCamState.MoveToPos2:
             targetPosition = pos2.position;
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetPosition.x,targetPosition.y,-10), moveSpeed*Time.deltaTime);
+            if (transform.position == targetPosition)
+            camState = eCamState.Static;
             break;
 
 
