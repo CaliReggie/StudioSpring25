@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     // System
     private Rigidbody2D _rb;
     private Animator Anim;
-    private Collider2D _col;
     private Health _health;
     
     //FSM
@@ -62,14 +61,14 @@ public class PlayerController : MonoBehaviour
     private InputAction _togglePause;
     
     [Header("Player's properties")]
-    public PlayerStats _playerStats;
-
+    [SerializeField] private PlayerScriptableObject PlayerStats; 
+    public int PlayerID;
     [HideInInspector] public float wishVel_x;
     private int jmpLimit;
     private int jmpHeight;
     private int djmpHeight;
 
-    [SerializeField] private float fallScale = 2.5f;
+   
 
     [Header("Polish")] 
     [SerializeField] private int timeToStopGroundCheck;
@@ -79,6 +78,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float accel_x;
     [SerializeField] private float minimumRunSpeed;
     [SerializeField] private float wishJumpExpirationDuration;
+    [SerializeField] private float fallScale = 2.5f;
     
     [Header("Hitstun")]
     public float hitStunTime = 1f;
@@ -96,9 +96,7 @@ public class PlayerController : MonoBehaviour
     private GameObject _activePlayer;
     [HideInInspector] public int activePlayerID;
     private IPlayerAction _activePlayerAction;
-    [SerializeField] private PlayerScriptableObject PlayerStats;
     
-    public int PlayerID;
     public Action OnGrounded;
     private bool _isGrounded;
     public Action OnFirstJump;
@@ -112,12 +110,13 @@ public class PlayerController : MonoBehaviour
 
     private bool wishJump;
     private float wishJumpExpiration;
+
+    private float _initScale;
     
     #region Unity Events
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _col = GetComponent<CapsuleCollider2D>();
         _input = GetComponent<PlayerInput>();
         _sColl = GetComponent<Collision>();
         _sAnim = GetComponentInChildren<AnimationScript>();
@@ -127,6 +126,7 @@ public class PlayerController : MonoBehaviour
         stopGroundCheck = 0;
         hangTimeCountdown = hangTime;
         initGravScale = _rb.gravityScale;
+        _initScale = transform.localScale.x;
         
         FetchPlayer(PlayerStats);
         
@@ -188,7 +188,6 @@ public class PlayerController : MonoBehaviour
         _health.OnDespawn -= OnDespawn;
        // _health.OnRespawn -= OnRespawn;
         
-        //_sLoader.OnLoaded -= FetchPlayerFromLoader;
         //_togglePause.performed -= OnPressingPause;
     }
     
@@ -478,7 +477,7 @@ public class PlayerController : MonoBehaviour
         _rb.velocity = new Vector2(currentVel_x, _rb.velocity.y);
         
         direction = hDirection;
-        transform.localScale = new Vector2(direction * 2, 2);  // forgive me
+        transform.localScale = new Vector2(direction * _initScale, _initScale);  // forgive me
     }
 
     private void AirMove()
@@ -499,7 +498,7 @@ public class PlayerController : MonoBehaviour
         _rb.velocity = new Vector2(currentVel_x * hDirection, _rb.velocity.y);
 
         direction = hDirection;
-        transform.localScale = new Vector2(direction * 2, 2);  // forgive me
+        transform.localScale = new Vector2(direction * _initScale, _initScale);  // forgive me
     }
     
     #endregion
@@ -524,4 +523,17 @@ public class PlayerController : MonoBehaviour
         animating = false;
         _sAnim.SetAnimating(animating);
     }
+    
+    #region Add Stats
+
+    public void AddSpeed(float amount)
+    {
+        wishVel_x += amount;
+    }
+    
+    public void AddJumpHeight(float amount)
+    {
+        jmpHeight += (int)amount;
+    }
+    #endregion
 }
