@@ -68,9 +68,10 @@ public class Damage : MonoBehaviour
     /// <param name="collision">The Collider2D that has hit this Collider2D</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Collision detected");
         if (dealDamageOnCollision)
         {
-            DealDamage(collision.gameObject);
+            DealDamage(collision.gameObject, collision);
         }
     }
 
@@ -84,8 +85,9 @@ public class Damage : MonoBehaviour
     /// void (no return)
     /// </summary>
     /// <param name="collisionGameObject">The game object that has been collided with</param>
-    private void DealDamage(GameObject collisionGameObject)
+    public virtual void DealDamage(GameObject collisionGameObject, Collision2D collider = null)
     {
+        
         Health collidedHealth = collisionGameObject.GetComponent<Health>();
         if (collidedHealth != null)
         {

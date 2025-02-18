@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
     private InputAction _abilityAction;
     private InputAction _moveAction;
     private InputAction _togglePause;
+    private InputAction _attackAction;
     
     [Header("Player's properties")]
     [SerializeField] private PlayerScriptableObject PlayerStats; 
@@ -67,9 +68,7 @@ public class PlayerController : MonoBehaviour
     private int jmpLimit;
     private int jmpHeight;
     private int djmpHeight;
-
-   
-
+    
     [Header("Polish")] 
     [SerializeField] private int timeToStopGroundCheck;
     [SerializeField] private float jmpGravScale;
@@ -112,6 +111,9 @@ public class PlayerController : MonoBehaviour
     private float wishJumpExpiration;
 
     private float _initScale;
+
+    [SerializeField] private GameObject AttackPoint;
+    [SerializeField] private float activeHitboxTime;
     
     #region Unity Events
     void Start()
@@ -139,6 +141,9 @@ public class PlayerController : MonoBehaviour
         _moveAction = _input.actions["Move"];
         _moveAction.started += OnMovement;
         _moveAction.canceled += OnMovement;
+
+        _attackAction = _input.actions["Attack"];
+        _attackAction.performed += OnAttack;
         
         _health.OnTakeDamage += OnTakeDamage;
         _health.OnDespawn += OnDespawn;
@@ -221,8 +226,22 @@ public class PlayerController : MonoBehaviour
     }
     */
 
+    void OnAttack(InputAction.CallbackContext context)
+    {
+        if (animating) return;
+        //Attack();
+        StartCoroutine(Attack());
+    }
+    
     #endregion
 
+    private IEnumerator Attack()
+    {
+        AttackPoint.SetActive(true);
+        yield return new WaitForSeconds(activeHitboxTime);
+        AttackPoint.SetActive(false);
+    }
+    
     /// <summary>
     /// Take damage event routine
     /// Will performs the take damage animation and knockback

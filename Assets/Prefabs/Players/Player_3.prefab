@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7672273578465264261}
   - component: {fileID: 6683806403584400810}
   - component: {fileID: 2330746509439126205}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 7417511811015740051}
   - component: {fileID: 5285447377960720782}
   - component: {fileID: 7392438576740345572}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player_3
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -169,6 +169,7 @@ Transform:
   - {fileID: 429589180034676315}
   - {fileID: 4066878399586872072}
   - {fileID: 4254402370580758117}
+  - {fileID: 6631788163479234636}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &4301224524804622590
@@ -248,16 +249,9 @@ MonoBehaviour:
   onGround: 0
   animating: 0
   direction: 0
-  _playerStats:
-    heroName: 
-    jmpLimit: 0
-    walkSpeed: 0
-    jmpHeight: 0
-    djmpHeight: 0
-    jmpGravScale: 0
-    animOverride: {fileID: 0}
+  PlayerStats: {fileID: 11400000, guid: 5e6e4f928744573478e65bf1adfe5159, type: 2}
+  PlayerID: 3
   wishVel_x: 0
-  fallScale: 2.5
   timeToStopGroundCheck: 5
   jmpGravScale: 0.07
   hangTime: 10
@@ -265,16 +259,17 @@ MonoBehaviour:
   accel_x: 1
   minimumRunSpeed: 0
   wishJumpExpirationDuration: 0
+  fallScale: 2.5
   hitStunTime: 0.5
   hitStunForce: 5
   hDirection: 0
   activePlayerID: 0
-  PlayerStats: {fileID: 11400000, guid: 5e6e4f928744573478e65bf1adfe5159, type: 2}
-  PlayerID: 3
   SpawnSFX: {fileID: 5285447377960720782}
   JumpSFX: {fileID: 2744208709174100708}
   DjumpSFX: {fileID: 7417511811015740051}
   CancelSFX: {fileID: 7392438576740345572}
+  AttackPoint: {fileID: 4967321675846703648}
+  activeHitboxTime: 0
 --- !u!114 &4574118870657125497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,7 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9c930353ade9a5439b2e600b487aca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamID: 0
+  teamID: 3
   defaultHealth: 2
   maximumHealth: 3
   currentHealth: 2
@@ -884,7 +879,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6330883144012364887}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CollisionRay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -917,7 +912,7 @@ GameObject:
   - component: {fileID: 5156405950771486090}
   - component: {fileID: 3818234659158042223}
   - component: {fileID: 7952626413452622426}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SmokeEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -966,6 +961,122 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smokeEffect: {fileID: 1383313127999071563, guid: 80eb1712b0963f94fb73e1b15c8fd7a9, type: 3}
   FrogID: 1
+--- !u!1 &4967321675846703648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6631788163479234636}
+  - component: {fileID: 1352302309209980523}
+  - component: {fileID: 843647838092273551}
+  - component: {fileID: 1859502284346435533}
+  m_Layer: 7
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6631788163479234636
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4967321675846703648}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.34, y: -0.18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7028225656776437666}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1352302309209980523
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4967321675846703648}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.20279169
+--- !u!114 &843647838092273551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4967321675846703648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88cb4777f6d1794988fc7733565fa57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamID: 3
+  damageAmount: 0
+  destroyAfterDamage: 0
+  dealDamageOnTriggerEnter: 1
+  dealDamageOnTriggerStay: 0
+  dealDamageOnCollision: 0
+  disableAfterDamage: 1
+  damageEffect: {fileID: 2432218214701231825, guid: 256f544861935be4eb6df6cc21cfa2da, type: 3}
+--- !u!50 &1859502284346435533
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4967321675846703648}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &5322063286233109334
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,7 +1089,7 @@ GameObject:
   - component: {fileID: 6647210012804584123}
   - component: {fileID: 8955909406993320539}
   - component: {fileID: 2118480134582351272}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RunningEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1099,7 +1210,7 @@ GameObject:
   - component: {fileID: 8997925712626776310}
   - component: {fileID: 3321215847303949344}
   - component: {fileID: 8414561284972244942}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HealthSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1362,7 +1473,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6140980739232304823}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundRay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1396,7 +1507,7 @@ GameObject:
   - component: {fileID: 6711495912155370693}
   - component: {fileID: 2371331306848525244}
   - component: {fileID: 40200514150603023}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WalkingSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}

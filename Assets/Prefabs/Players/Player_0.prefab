@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3743349355834984334}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CollisionRay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 3056744792962553083}
   - component: {fileID: 6701009087182721086}
   - component: {fileID: 1244537197633952803}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 206939588826848961}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundRay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 5775317958744679358}
   - component: {fileID: 6519311235103946066}
   - component: {fileID: 7799002483210429850}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player_0
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -231,6 +231,7 @@ Transform:
   - {fileID: 6928319374522699389}
   - {fileID: 7916298670502487683}
   - {fileID: 809436506829811427}
+  - {fileID: 4790930504101535013}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &3794350406177778968
@@ -310,16 +311,9 @@ MonoBehaviour:
   onGround: 0
   animating: 0
   direction: 0
-  _playerStats:
-    heroName: 
-    jmpLimit: 0
-    walkSpeed: 0
-    jmpHeight: 0
-    djmpHeight: 0
-    jmpGravScale: 0
-    animOverride: {fileID: 0}
+  PlayerStats: {fileID: 11400000, guid: dd6e56d3b3656a54780043ff2fec486b, type: 2}
+  PlayerID: 0
   wishVel_x: 0
-  fallScale: 2.5
   timeToStopGroundCheck: 5
   jmpGravScale: 0.07
   hangTime: 10
@@ -327,16 +321,17 @@ MonoBehaviour:
   accel_x: 1
   minimumRunSpeed: 0
   wishJumpExpirationDuration: 0
+  fallScale: 2.5
   hitStunTime: 0.5
   hitStunForce: 5
   hDirection: 0
   activePlayerID: 0
-  PlayerStats: {fileID: 11400000, guid: dd6e56d3b3656a54780043ff2fec486b, type: 2}
-  PlayerID: 0
   SpawnSFX: {fileID: 6519311235103946066}
   JumpSFX: {fileID: 9196571603484402545}
   DjumpSFX: {fileID: 5775317958744679358}
   CancelSFX: {fileID: 7799002483210429850}
+  AttackPoint: {fileID: 2264077731683885606}
+  activeHitboxTime: 3
 --- !u!114 &5158177158282094722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -937,6 +932,122 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1158308817885048871}
+--- !u!1 &2264077731683885606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4790930504101535013}
+  - component: {fileID: 4310959149995441423}
+  - component: {fileID: 866158411772487148}
+  - component: {fileID: 2543091651621780417}
+  m_Layer: 7
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4790930504101535013
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2264077731683885606}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.36, y: -0.16, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8642478782301089399}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &4310959149995441423
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2264077731683885606}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.20279169
+--- !u!114 &866158411772487148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2264077731683885606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88cb4777f6d1794988fc7733565fa57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamID: 0
+  damageAmount: 0
+  destroyAfterDamage: 0
+  dealDamageOnTriggerEnter: 1
+  dealDamageOnTriggerStay: 0
+  dealDamageOnCollision: 0
+  disableAfterDamage: 1
+  damageEffect: {fileID: 2432218214701231825, guid: 256f544861935be4eb6df6cc21cfa2da, type: 3}
+--- !u!50 &2543091651621780417
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2264077731683885606}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &5628644180002295792
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,7 +1062,7 @@ GameObject:
   - component: {fileID: 1202982308700941560}
   - component: {fileID: 2556228619550919957}
   - component: {fileID: 5763170112991761541}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HealthSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1217,7 +1328,7 @@ GameObject:
   - component: {fileID: 6157504925458944048}
   - component: {fileID: 5397589067101420462}
   - component: {fileID: 7490628798003114154}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RunningEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1336,7 +1447,7 @@ GameObject:
   - component: {fileID: 6849707331241065012}
   - component: {fileID: 5291030829285320081}
   - component: {fileID: 3818313946867183228}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WalkingSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1576,7 +1687,7 @@ GameObject:
   - component: {fileID: 3944256077104335025}
   - component: {fileID: 3193685251669055815}
   - component: {fileID: 1643714198914226290}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SmokeEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
