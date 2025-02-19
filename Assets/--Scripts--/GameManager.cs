@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -11,7 +12,10 @@ public class GameManager : MonoBehaviour
 
     [Header("Inscribed")]
     public GameObject playerPrefab;
-
+    
+    //public on player joined event for things to sub to
+    public event Action<int> PlayerJoined;
+    
     private List<PlayerInput> players = new List<PlayerInput>();
 
     private PlayerInputManager playerInputManager;
@@ -31,6 +35,11 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         playerInputManager = FindObjectOfType<PlayerInputManager>();
+    }
+    
+    private void BroadcastPlayerJoined(int playerNum)
+    {
+        PlayerJoined?.Invoke(playerNum);
     }
 
     public static void LoadPlayers(List<PlayerInput> playerInputs)
@@ -58,6 +67,8 @@ public class GameManager : MonoBehaviour
             foreach (Transform child in playerInput.GetComponentInChildren<Transform>())
             {
                 child.gameObject.SetActive(true);
+                
+                BroadcastPlayerJoined(playerInput.playerIndex);
             }
         }
     }

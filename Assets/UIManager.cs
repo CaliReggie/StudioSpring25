@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.Serialization;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
-    
+
     [Header("Debug")]
     
     [SerializeField]
@@ -95,24 +96,68 @@ public class UIManager : MonoBehaviour
         }
     }
     
-    private void Update()
+    private void Start()
     {
-        //all of this is debug, can be removed once the game is working, simply demonstrating how to use the UIManager
-        if (addPlayerUIGroups)
+        GameManager.S.PlayerJoined += OnPlayerJoined;
+    }
+    
+    private void OnPlayerJoined(int playerNum)
+    {
+        CreatePlayerUIGroups(playerNum);
+    }
+    
+    public void UpdateAttackIcon(int playerNum, bool available, float fillAmount = -1)
+    {
+        if (PlayerUIGroups == null || playerNum < 1 || playerNum > PlayerUIGroups.Length)
         {
-            addPlayerUIGroups = false;
+            Debug.LogError("UIManager: Player number is out of range");
             
-            if (PlayerUIGroups != null) return;
-            
-            CreatePlayerUIGroups(playerCount);
+            return;
         }
         
-        if (removePlayerUIGroups)
+        PlayerUIGroups[playerNum - 1].UpdateAttackIcon(available, fillAmount);
+    }
+    
+    public void UpdateFlyIcon(int playerNum, bool available, float fillAmount  = -1)
+    {
+        if (PlayerUIGroups == null || playerNum < 1 || playerNum > PlayerUIGroups.Length)
         {
-            removePlayerUIGroups = false;
+            Debug.LogError("UIManager: Player number is out of range");
             
-            if (PlayerUIGroups == null) return;
+            return;
+        }
+        
+        PlayerUIGroups[playerNum - 1].UpdateFlyIcon(available, fillAmount);
+    }
+    
+    public void UpdateRunIcon(int playerNum, bool available, float fillAmount = -1)
+    {
+        if (PlayerUIGroups == null || playerNum < 1 || playerNum > PlayerUIGroups.Length)
+        {
+            Debug.LogError("UIManager: Player number is out of range");
             
+            return;
+        }
+        
+        PlayerUIGroups[playerNum - 1].UpdateRunIcon(available, fillAmount);
+    }
+    
+    public void UpdateStaminaIcon(int playerNum, float fillAmount)
+    {
+        if (PlayerUIGroups == null || playerNum < 1 || playerNum > PlayerUIGroups.Length)
+        {
+            Debug.LogError("UIManager: Player number is out of range");
+            
+            return;
+        }
+        
+        PlayerUIGroups[playerNum - 1].UpdateStaminaIcon(fillAmount);
+    }
+    
+    private void CreatePlayerUIGroups(int playerCount = 1)
+    {
+        if (PlayerUIGroups != null)
+        {
             for (int i = 0; i < PlayerUIGroups.Length; i++)
             {
                 Destroy(PlayerUIGroups[i].gameObject);
@@ -121,27 +166,6 @@ public class UIManager : MonoBehaviour
             PlayerUIGroups = null;
         }
         
-        if (updateTargetGroup && PlayerUIGroups != null && targetUpdateGroup <= PlayerUIGroups.Length)
-        {
-            updateTargetGroup = false;
-            
-            PlayerUIGroup targetGroup = PlayerUIGroups[targetUpdateGroup - 1];
-            
-            targetGroup.SetPlayerColor( targetPlayerIconColor );
-            
-            targetGroup.UpdateAttackIcon( attackIconAvailable, attackLevelUpFillAmount);
-            
-            targetGroup.UpdateFlyIcon( flyIconAvailable, flyLevelUpFillAmount);
-            
-            targetGroup.UpdateRunIcon( runIconAvailable, runLevelUpFillAmount);
-            
-            targetGroup.UpdateStaminaIcon( staminaFillAmount );
-        }
-    }
-    
-    
-    public void CreatePlayerUIGroups(int playerCount = 1)
-    {
         if (playerCount < 1 || playerCount > 4)
         {
             Debug.LogError("UIManager: Player count must be between 1 and 4");
