@@ -24,6 +24,20 @@ public class GameManager : MonoBehaviour
     private float difficultyMax;
     static public Rect CAMERA_BOUNDS;
 
+    [SerializeField] private bool broadcastPlayerJoined = false;
+    
+    [Range(1,4)] [SerializeField] private int broadcastPlayerNum = 1;
+    
+    private void OnValidate()
+    {
+        if (broadcastPlayerJoined)
+        {
+            broadcastPlayerJoined = false;
+            
+            BroadcastPlayerJoined(broadcastPlayerNum);
+        }
+    }
+
     private void Awake()
     {
         if (S != null)
