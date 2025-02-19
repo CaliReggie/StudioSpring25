@@ -552,9 +552,9 @@ public class PlayerController : MonoBehaviour
         wishVel_x += amount;
         // Update UI
         // Percentage based on the init value
-        Debug.Log((wishVel_x - _initSpeed)/_initSpeed);
+        Debug.Log($"Updated speed to: {((wishVel_x - _initSpeed)/_initSpeed).ToString()}");
         //UIManager.Instance.PlayerUIGroups[PlayerID].UpdateStaminaIcon((wishVel_x - _initSpeed)/_initSpeed);
-        UIManager.Instance.UpdateStaminaIcon(PlayerID, 0.4f);
+        UIManager.Instance.UpdateStaminaIcon(_input.playerIndex, 0.4f);
     }
     
     public void AddJumpHeight(float amount)
