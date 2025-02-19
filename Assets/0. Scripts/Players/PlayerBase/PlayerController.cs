@@ -111,6 +111,7 @@ public class PlayerController : MonoBehaviour
     private float wishJumpExpiration;
 
     private float _initScale;
+    private float _initSpeed;
 
     [SerializeField] private GameObject AttackPoint;
     [SerializeField] private float activeHitboxTime;
@@ -129,9 +130,10 @@ public class PlayerController : MonoBehaviour
         hangTimeCountdown = hangTime;
         initGravScale = _rb.gravityScale;
         _initScale = transform.localScale.x;
+
         
         FetchPlayer(PlayerStats);
-        
+        _initSpeed = wishVel_x;
         // Input system
         _jumpAction = _input.actions["Jump"];
         _jumpAction.performed += OnJump;
@@ -209,7 +211,7 @@ public class PlayerController : MonoBehaviour
     void OnExecuteMove(InputAction.CallbackContext context)
     {
         if (animating) return;
-
+    
         ExecuteMove();
     }
     
@@ -548,11 +550,18 @@ public class PlayerController : MonoBehaviour
     public void AddSpeed(float amount)
     {
         wishVel_x += amount;
+        // Update UI
+        // Percentage based on the init value
+        Debug.Log((wishVel_x - _initSpeed)/_initSpeed);
+        //UIManager.Instance.PlayerUIGroups[PlayerID].UpdateStaminaIcon((wishVel_x - _initSpeed)/_initSpeed);
+        UIManager.Instance.UpdateStaminaIcon(PlayerID, 0.4f);
     }
     
     public void AddJumpHeight(float amount)
     {
         jmpHeight += (int)amount;
+        // Percentage based on the init value
+        //UIManager.Instance.PlayerUIGroups[PlayerID].UpdateFlyIcon((wishVel_x - _initSpeed)/_initSpeed);
     }
     #endregion
 }
