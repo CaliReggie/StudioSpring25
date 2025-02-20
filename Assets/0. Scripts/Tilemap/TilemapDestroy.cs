@@ -14,7 +14,7 @@ public class TilemapDestroy : MonoBehaviour
     void Start()
     {
         GetTiles();
-        StartCoroutine(DestroyTiles());
+        //StartCoroutine(DestroyTiles());
     }
 
     // Update is called once per frame
