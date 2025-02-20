@@ -10,6 +10,10 @@ public class CameraScript : MonoBehaviour
     public Transform pos2;
     Vector3 targetPosition;
     public float moveSpeed = 10f;
+    public Collider2D colliderTop;
+    public Collider2D colliderLeft;
+    public Collider2D colliderRight;
+    public Collider2D colliderDown;
 
     public enum eCamState
     {
@@ -32,16 +36,24 @@ public class CameraScript : MonoBehaviour
         switch(camState)
         {
             case eCamState.Static:
+            colliderTop.isTrigger = false;
+            colliderLeft.isTrigger = false;
+            colliderRight.isTrigger = false;
+            colliderDown.isTrigger = true;
             break;
 
             case eCamState.MoveToPos1:
+            colliderDown.isTrigger = true;
             targetPosition = pos1.position;
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetPosition.x,targetPosition.y,-10), moveSpeed*Time.deltaTime);
+            
             if (transform.position == targetPosition)
             camState = eCamState.Static;
             break;
 
             case eCamState.MoveToPos2:
+            colliderLeft.isTrigger = true;
+            colliderDown.isTrigger = true;
             targetPosition = pos2.position;
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetPosition.x,targetPosition.y,-10), moveSpeed*Time.deltaTime);
             if (transform.position == targetPosition)

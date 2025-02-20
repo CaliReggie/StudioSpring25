@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 3035562205172938322}
   - component: {fileID: 581593297896933784}
   m_Layer: 0
-  m_Name: Test
+  m_Name: Breakable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
