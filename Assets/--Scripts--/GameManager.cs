@@ -28,6 +28,14 @@ public class GameManager : MonoBehaviour
     
     [Range(1,4)] [SerializeField] private int broadcastPlayerNum = 1;
     
+    [Header("List of characters to choose from")]
+    [SerializeField] private List<PlayerScriptableObject> characterList;
+    private int nextPlayeridx = 0;
+    
+    [SerializeField] private GameObject spawnpoint;
+    private Vector3 spawnpointPos;
+    
+    #region Unity Events
     private void OnValidate()
     {
         if (broadcastPlayerJoined)
@@ -50,11 +58,50 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         playerInputManager = FindObjectOfType<PlayerInputManager>();
     }
-    
+
+    private void Start()
+    {
+        if (!spawnpoint)
+        {
+            Debug.LogError("GameManager: Spawnpoint not set! defaulting to GameManger position");
+            spawnpointPos = transform.position;
+        }
+        else spawnpointPos = spawnpoint.transform.position;
+   
+        PlayerInputManager.instance.onPlayerJoined += OnPlayerJoined;
+        StartGame();
+    }
+    #endregion
     private void BroadcastPlayerJoined(int playerNum)
     {
         PlayerJoined?.Invoke(playerNum);
     }
+    
+    private void OnPlayerJoined(PlayerInput playerInput)
+    {
+        LoadTopPlayer(playerInput.transform.gameObject);
+    }
+    
+    // Load the top player from the list
+    // Pass the information to the player controller and then increment the index
+    /*
+     * ID starts from 1 but List index starts from 0
+     * As such, I first get character list then I increment it in the same line
+     * Then I assign the ID to the player and broadcast the changes
+     * This could be very messy if we were to change from the idx starting point
+     *  But since we are not changing it, it is fine for now, but please be careful
+     */
+    private void LoadTopPlayer(GameObject player)
+    {
+        player.transform.position = spawnpointPos;
+        // Prevent getting non existing character data.
+        // Also increment the index. Since ++ still returns the previous number it will work
+        player.GetComponent<PlayerController>().PlayerStats = characterList[nextPlayeridx++ % characterList.Count];
+        BroadcastPlayerJoined(nextPlayeridx);
+        player.GetComponent<PlayerController>().PlayerID = nextPlayeridx;
+        players.Add(player.GetComponent<PlayerInput>());
+    }
+
 
     public static void LoadPlayers(List<PlayerInput> playerInputs)
     {
@@ -65,15 +112,14 @@ public class GameManager : MonoBehaviour
                 S.players.Add(playerInputs[i]);
         }
         S.playerInputManager.joinBehavior = PlayerJoinBehavior.JoinPlayersManually;
-
     }
 
     public static void StartGame()
     {
-        S.MakePlayers();
+        //S.MakePlayers();
         //S.CreateSplitScreen(S.playerInputManager.playerCount);
     }
-
+    
     public void MakePlayers()
     {
         foreach (PlayerInput playerInput in players)

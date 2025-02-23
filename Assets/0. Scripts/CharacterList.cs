@@ -5,14 +5,12 @@ using UnityEngine;
 
 public class CharacterList : ScriptableObject
 {
-    [System.Serializable]
+    /*[System.Serializable]
     public struct CharacterProperties
     {
-        public string name;
         public int id;
         public PlayerScriptableObject scriptableObject;
-        public GameObject prefab;
-    }
+    }*/
 
-    public List<CharacterProperties> allCharacterList;
+    public List<PlayerScriptableObject> allCharacterList;
 }

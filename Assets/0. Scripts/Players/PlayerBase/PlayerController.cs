@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
     private InputAction _attackAction;
     
     [Header("Player's properties")]
-    [SerializeField] private PlayerScriptableObject PlayerStats; 
+    public PlayerScriptableObject PlayerStats; 
     public int PlayerID;
     [HideInInspector] public float wishVel_x;
     private int jmpLimit;
@@ -89,10 +89,8 @@ public class PlayerController : MonoBehaviour
     // Other script
     private Collision _sColl; 
     private AnimationScript _sAnim;
-    private PlayerLoader _sLoader;
     
     // Active players
-    private GameObject _activePlayer;
     [HideInInspector] public int activePlayerID;
     private IPlayerAction _activePlayerAction;
     
@@ -123,7 +121,6 @@ public class PlayerController : MonoBehaviour
         _input = GetComponent<PlayerInput>();
         _sColl = GetComponent<Collision>();
         _sAnim = GetComponentInChildren<AnimationScript>();
-        _sLoader = GetComponent<PlayerLoader>();
         _health = GetComponent<Health>();
         
         stopGroundCheck = 0;
@@ -303,7 +300,7 @@ public class PlayerController : MonoBehaviour
     ///  Fetch and apply the stats from the scriptable object
     /// </summary>
 
-    void FetchPlayer(PlayerScriptableObject Stats)
+    public void FetchPlayer(PlayerScriptableObject Stats)
     {
         jmpLimit = Stats.PlayerStats.jmpLimit;
         wishVel_x = Stats.PlayerStats.walkSpeed;

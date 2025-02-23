@@ -11,8 +11,7 @@ namespace Scripts
     {
         private Animator _anim;
         private Collision _sColl;
-
-        private PlayerLoader _sLoader;
+        
         private AnimatorOverrideController _animOverride;
 
         #region Unity Events
@@ -20,7 +19,6 @@ namespace Scripts
         {
             _anim = GetComponent<Animator>();
             _sColl = GetComponentInParent<Collision>();
-            //_sLoader = GetComponentInParent<PlayerLoader>();
             
             if (!_anim) Debug.LogWarning("AnimationScript: Missing Animator!");
             
@@ -35,14 +33,7 @@ namespace Scripts
             _anim.SetBool("onground", _sColl.onGround);
         }
         #endregion
-
-        /// <summary>
-        /// Animation for when the player has been loaded
-        /// </summary>
-        private void HandleEventLoaded()
-        {
-            ChangeAnim(_sLoader.curPlayerStats.animOverride);
-        }
+        
 
         /// <summary>
         /// Set the current state of the animation
