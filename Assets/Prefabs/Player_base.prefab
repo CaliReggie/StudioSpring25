@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 3794350406177778968}
   - component: {fileID: 2600013547407283176}
   - component: {fileID: 3880918669535485049}
+  - component: {fileID: 5374087628649222849}
   - component: {fileID: 5158177158282094722}
   - component: {fileID: 4366183734511609030}
   - component: {fileID: 6696675794347739136}
@@ -210,7 +211,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8642478782301089399
 Transform:
   m_ObjectHideFlags: 0
@@ -332,6 +333,22 @@ MonoBehaviour:
   CancelSFX: {fileID: 7799002483210429850}
   AttackPoint: {fileID: 2264077731683885606}
   activeHitboxTime: 3
+--- !u!114 &5374087628649222849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810743968341179908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d6c2e3174a64e746a05f25b6f300ba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staminaLevelThreshold: 100
+  speedLevelThreshold: 100
+  staminaAddAmount: 5
+  speedAddAmount: 5
 --- !u!114 &5158177158282094722
 MonoBehaviour:
   m_ObjectHideFlags: 0

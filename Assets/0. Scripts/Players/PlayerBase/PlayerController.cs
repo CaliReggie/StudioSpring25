@@ -92,7 +92,6 @@ public class PlayerController : MonoBehaviour
     
     // Active players
     [HideInInspector] public int activePlayerID;
-    private IPlayerAction _activePlayerAction;
     
     public Action OnGrounded;
     private bool _isGrounded;
@@ -551,7 +550,6 @@ public class PlayerController : MonoBehaviour
         // Percentage based on the init value
         Debug.Log($"Updated speed to: {((wishVel_x - _initSpeed)/_initSpeed).ToString()}");
         //UIManager.Instance.PlayerUIGroups[PlayerID].UpdateStaminaIcon((wishVel_x - _initSpeed)/_initSpeed);
-        UIManager.Instance.UpdateStaminaIcon(_input.playerIndex, 0.4f);
     }
     
     public void AddJumpHeight(float amount)
