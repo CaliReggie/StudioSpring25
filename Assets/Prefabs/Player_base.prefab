@@ -345,10 +345,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d6c2e3174a64e746a05f25b6f300ba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaLevelThreshold: 100
-  speedLevelThreshold: 100
-  staminaAddAmount: 5
-  speedAddAmount: 5
+  atkLevel: 0
+  runLevel: 0
+  flyLevel: 0
+  atkXP: 0
+  runXP: 0
+  flyXP: 0
+  atkLevelThreshold: 100
+  runLevelThreshold: 100
+  flyLevelThreshold: 100
+  atkAddAmount: 50
+  runAddAmount: 50
+  flyAddAmount: 50
 --- !u!114 &5158177158282094722
 MonoBehaviour:
   m_ObjectHideFlags: 0
