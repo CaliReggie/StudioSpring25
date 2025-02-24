@@ -83,13 +83,12 @@ public class GameManager : MonoBehaviour
     }
     
     // Load the top player from the list
-    // Pass the information to the player controller and then increment the index
+    // Pass the information to the player and then increment the index
     /*
      * ID starts from 1 but List index starts from 0
-     * As such, I first get character list then I increment it in the same line
-     * Then I assign the ID to the player and broadcast the changes
-     * This could be very messy if we were to change from the idx starting point
-     *  But since we are not changing it, it is fine for now, but please be careful
+     * As such, I first get the character stats with nextPlayeridx then I increment it in the same line
+     * This could be very messy if we were to change the idx starting point
+     * But since we are not changing it, it is fine for now. Still, please be careful
      */
     private void LoadTopPlayer(GameObject player)
     {

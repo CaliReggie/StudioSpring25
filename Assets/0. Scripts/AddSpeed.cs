@@ -8,7 +8,7 @@ public class AddSpeed : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             PlayerLevel player = collision.gameObject.GetComponent<PlayerLevel>();
-            player.AddSpeedLevel(amount);
+            player.AddRunXP(amount);
             /*// Spawn animation
             _sfx.PlaySound();
             _anim.SetTrigger("collected");*/
