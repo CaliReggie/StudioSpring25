@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float activeHitboxTime;
     
     #region Unity Events
-    void Start()
+    void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _input = GetComponentInParent<PlayerInput>();
@@ -185,17 +185,49 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
+        OnDespawn();
+        
         _jumpAction.performed -= OnJump;
+        
+        _abilityAction.performed -= OnExecuteMove;
+        
+        _attackAction.performed -= OnAttack;
+        
         _moveAction.started -= OnMovement;
         _moveAction.canceled -= OnMovement;
         _moveAction.Disable();
+        
         _health.OnTakeDamage -= OnTakeDamage;
         _health.OnDespawn -= OnDespawn;
+        
        // _health.OnRespawn -= OnRespawn;
         
         //_togglePause.performed -= OnPressingPause;
     }
-    
+
+    private void OnEnable()
+    {
+        UnfreezeMovement();
+        
+        
+        _jumpAction.performed += OnJump;
+        
+        _abilityAction.performed += OnExecuteMove;
+        
+        _attackAction.performed += OnAttack;
+        
+        _moveAction.started += OnMovement;
+        _moveAction.canceled += OnMovement;
+        _moveAction.Enable();
+        
+        _health.OnTakeDamage += OnTakeDamage;
+        _health.OnDespawn += OnDespawn;
+        
+        //_health.OnRespawn += OnRespawn;
+        
+        //_togglePause.performed += OnPressingPause;
+    }
+
     #endregion
 
     #region Input Actions

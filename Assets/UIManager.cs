@@ -7,57 +7,6 @@ using UnityEngine.Serialization;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
-
-    [Header("Debug")]
-    
-    [SerializeField]
-    private bool addPlayerUIGroups = false;
-    
-    [Range(1, 4)] 
-    [SerializeField] 
-    private int playerCount = 1;
-    
-    [SerializeField]
-    private bool removePlayerUIGroups = false;
-    
-    [Space]
-    
-    [Range(1, 4)]
-    [SerializeField] 
-    private int targetUpdateGroup = 1;
-    
-    [SerializeField]
-    private Color targetPlayerIconColor = Color.white;
-    
-    [SerializeField]
-    private bool attackIconAvailable = true;
-    
-    [Range(0,1)]
-    [SerializeField]
-    private float attackLevelUpFillAmount = 0.5f;
-    
-    [SerializeField]
-    private bool flyIconAvailable = true;
-    
-    [Range(0,1)]
-    [SerializeField]
-    private float flyLevelUpFillAmount = 0.5f;
-    
-    [SerializeField]
-    private bool runIconAvailable = true;
-    
-    [Range(0,1)]
-    [SerializeField]
-    private float runLevelUpFillAmount = 0.5f;
-    
-    [Range(0,1)]
-    [SerializeField]
-    private float staminaFillAmount = 0.5f;
-    
-    [Space]
-    
-    [SerializeField]
-    private bool updateTargetGroup = false;
     
     [Header("Player UI")]
     
