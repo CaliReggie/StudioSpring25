@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
 {
     // System
     private Rigidbody2D _rb;
-    private Animator Anim;
+    // private Animator Anim;
     private Health _health;
     
     //FSM
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
     
     // Other script
     private Collision _sColl; 
-    private AnimationScript _sAnim;
+    // private AnimationScript _sAnim;
     
     // Active players
     [HideInInspector] public int activePlayerID;
@@ -101,8 +101,9 @@ public class PlayerController : MonoBehaviour
     [Header("Sound effects")]
     [SerializeField] private PlaySoundOnce SpawnSFX;
     [SerializeField] private PlaySoundOnce JumpSFX;
-    [SerializeField] private PlaySoundOnce DjumpSFX;
-    [SerializeField] private PlaySoundOnce CancelSFX;
+    [SerializeField] private PlaySoundOnce DoubleJumpSFX;
+    [SerializeField] private PlaySoundOnce AttackSFX;
+    [SerializeField] private PlaySoundOnce HurtSFX;
 
     private bool wishJump;
     private float wishJumpExpiration;
@@ -119,7 +120,7 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _input = GetComponentInParent<PlayerInput>();
         _sColl = GetComponent<Collision>();
-        _sAnim = GetComponentInChildren<AnimationScript>();
+        // _sAnim = GetComponentInChildren<AnimationScript>();
         _health = GetComponent<Health>();
         
         stopGroundCheck = 0;
@@ -157,7 +158,7 @@ public class PlayerController : MonoBehaviour
         if(animating) return;
         StateTransition();
         
-        _sAnim.SetState((int)state);  
+        // _sAnim.SetState((int)state);  
     }
     
     void FixedUpdate()
@@ -270,8 +271,12 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Attack()
     {
         AttackPoint.SetActive(true);
+        AttackSFX.PlaySound();
+        
         yield return new WaitForSeconds(activeHitboxTime);
         AttackPoint.SetActive(false);
+        
+        
     }
     
     /// <summary>
@@ -281,9 +286,13 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private IEnumerator PerformTakeDamage()
     {
+        
+        
         Debug.Log("Player: Taking damage");
         // Change animation
-        _sAnim.SetTrigger("damaged");
+        // _sAnim.SetTrigger("damaged");
+        
+        HurtSFX.PlaySound();
         
         FreezeMovement();
         hDirection = 0;
@@ -291,6 +300,8 @@ public class PlayerController : MonoBehaviour
         _rb.velocity = new Vector2(-hitStunForce * direction, hitStunForce);
         // Set timer
         yield return new WaitForSeconds(hitStunTime);
+        
+        
         
         // Reset
         UnfreezeMovement();
@@ -305,7 +316,7 @@ public class PlayerController : MonoBehaviour
         // Knockback
         _rb.velocity = new Vector2(-hitStunForce * direction, hitStunForce);
         FreezeMovement();
-        _sAnim.SetTrigger("disappearing");
+        // _sAnim.SetTrigger("disappearing");
     }
 
     /// <summary>
@@ -340,7 +351,7 @@ public class PlayerController : MonoBehaviour
         jmpHeight = Stats.PlayerStats.jmpHeight;
         djmpHeight = Stats.PlayerStats.djmpHeight;
         jmpGravScale = Stats.PlayerStats.jmpGravScale;
-        _sAnim.ChangeAnim(Stats.PlayerStats.animOverride);
+        // _sAnim.ChangeAnim(Stats.PlayerStats.animOverride);
         Debug.Log("Stats: " +
                   "jmpLimit: " + jmpLimit + "\n" +
                   "wishVel_x: " + wishVel_x + "\n" +
@@ -421,9 +432,9 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Spawning");
         FreezeMovement();
-        //SpawnSFX.PlaySound();
+        SpawnSFX.PlaySound();
         // Trigger the animation
-        _sAnim.SetTrigger("appearing");
+        // _sAnim.SetTrigger("appearing");
         // Wait for animation to finish and then move on to Idle state
         yield return new WaitForSeconds(.5f);
 
@@ -453,7 +464,7 @@ public class PlayerController : MonoBehaviour
             {
                 hangTimeCountdown--;
             }
-            _sAnim.SetBool("falling", true);
+            // _sAnim.SetBool("falling", true);
             _rb.velocity +=
                 Vector2.up * Physics2D.gravity.y * (fallScale - 1) * Time.deltaTime; // falling acceleration
 
@@ -465,7 +476,7 @@ public class PlayerController : MonoBehaviour
             _isGrounded = true;
             hangTimeCountdown = hangTime;
             jumped = 0;
-            _sAnim.SetBool("falling", false);
+            // _sAnim.SetBool("falling", false);
             if (wishJump && Time.time < wishJumpExpiration)
             {
                 Jump();
@@ -488,22 +499,22 @@ public class PlayerController : MonoBehaviour
         
         if(jumped == 1)
         {
+            DoubleJumpSFX.PlaySound();
             // Double jump
-            //DjumpSFX.PlaySound();
             _rb.velocity = new Vector2(_rb.velocity.x, djmpHeight);
-            _sAnim.SetTrigger("djumped");
+            // _sAnim.SetTrigger("djumped");
             
         } else
         {
             // Normal jump
-            //if(activePlayerID != 1)JumpSFX.PlaySound();
+            JumpSFX.PlaySound();
             _rb.velocity = new Vector2(_rb.velocity.x, jmpHeight);
-            _sAnim.SetTrigger("jumped");
+            // _sAnim.SetTrigger("jumped");
             OnFirstJump?.Invoke();
         }
         //Debug.Log("jumped");
         jumped++;
-        _sAnim.SetBool("falling", false);
+        // _sAnim.SetBool("falling", false);
         _rb.gravityScale *= jmpGravScale;
 
         stopGroundCheck = timeToStopGroundCheck;
@@ -562,7 +573,7 @@ public class PlayerController : MonoBehaviour
         animating = true;
         _rb.velocity = Vector3.zero;
         _rb.gravityScale = 0;
-        _sAnim.SetAnimating(animating);
+        // _sAnim.SetAnimating(animating);
     }
 
     /// <summary>
@@ -572,25 +583,30 @@ public class PlayerController : MonoBehaviour
     {
         _rb.gravityScale = initGravScale;
         animating = false;
-        _sAnim.SetAnimating(animating);
+        // _sAnim.SetAnimating(animating);
     }
     
     #region Add Stats
 
-    public void AddSpeed(float amount)
+    public void AddSpeed(float speedAdded)
     {
-        wishVel_x += amount;
+        wishVel_x += speedAdded;
         // Update UI
         // Percentage based on the init value
         Debug.Log($"Updated speed to: {((wishVel_x - _initSpeed)/_initSpeed).ToString()}");
         //UIManager.Instance.PlayerUIGroups[PlayerID].UpdateStaminaIcon((wishVel_x - _initSpeed)/_initSpeed);
     }
     
-    public void AddJumpHeight(float amount)
+    public void AddJumpHeight(float jumpAdded)
     {
-        jmpHeight += (int)amount;
+        jmpHeight += (int)jumpAdded;
         // Percentage based on the init value
         //UIManager.Instance.PlayerUIGroups[PlayerID].UpdateFlyIcon((wishVel_x - _initSpeed)/_initSpeed);
+    }
+    
+    public void AddAttack(int hitAddition)
+    {
+        hitStunForce += hitAddition;
     }
     #endregion
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,16 @@ public class Damage : MonoBehaviour
     public bool dealDamageOnTriggerStay = false;
     [Tooltip("Whether or not to apply damage on non-trigger collider collisions")]
     public bool dealDamageOnCollision = false;
+
+    private void Start()
+    {
+        Health health = transform.GetComponentInParent<Health>();
+        
+        if (health != null)
+        {
+            teamID = health.teamID;
+        }
+    }
 
     /// <summary>
     /// Description:
@@ -91,12 +102,12 @@ public class Damage : MonoBehaviour
         Health collidedHealth = collisionGameObject.GetComponent<Health>();
         if (collidedHealth != null)
         {
-            if (collidedHealth.teamID != this.teamID)
+            if (collidedHealth.teamID != teamID)
             {
                 collidedHealth.TakeDamage(damageAmount);
                 if (destroyAfterDamage)
                 {
-                    Destroy(this.gameObject);
+                    Destroy(gameObject);
                 }
             }
         }

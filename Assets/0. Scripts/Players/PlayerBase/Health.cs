@@ -39,6 +39,11 @@ public class Health : MonoBehaviour
     private Material originalMat;
     private Color originalCol;
 
+    private void Start()
+    {
+        teamID = GetComponent<PlayerController>().PlayerID;
+    }
+
     #region Unity Events
     private void OnEnable()
     {

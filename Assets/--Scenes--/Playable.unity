@@ -308,7 +308,7 @@ MonoBehaviour:
   pos1: {fileID: 1156644900}
   pos2: {fileID: 1663448715}
   firstMoveSpeed: 1
-  secondMoveSpeed: 4
+  secondMoveSpeed: 3.75
   colliderTop: {fileID: 381956642}
   colliderLeft: {fileID: 2031231036}
   colliderRight: {fileID: 1408358312}
@@ -15197,10 +15197,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterList:
-  - {fileID: 1810743968341179908, guid: 6f975df2156312f438854e02de9672fb, type: 3}
-  - {fileID: 2938394773793268152, guid: 96649bff45d5b124c9fc685702938e1d, type: 3}
-  - {fileID: 3141807054732225201, guid: 31e03ed5dcd10304785bb63e114d535d, type: 3}
-  - {fileID: 1147220888705904706, guid: a508bd4828c0ee34d99a84dbffb5ecba, type: 3}
+  - {fileID: 563015820134692663, guid: 7d246ba3f2cbe5c469d666992bb7e715, type: 3}
+  - {fileID: 1233427249768465624, guid: 4203ee5dd640de34a947de9280048223, type: 3}
+  - {fileID: 134871565541591911, guid: efb539fd26c3c1f4ea65cb881d38a4fa, type: 3}
+  - {fileID: 7619294817767569574, guid: 892a62b977b232a41af3f7d1915d8c5c, type: 3}
   spawnpoint: {fileID: 349245537}
 --- !u!114 &1818167267
 MonoBehaviour:

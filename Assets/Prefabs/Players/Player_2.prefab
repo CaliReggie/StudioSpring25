@@ -405,7 +405,7 @@ MonoBehaviour:
   hangTime: 10
   decelAmount: 0.035
   accel_x: 1
-  minimumRunSpeed: 0
+  minimumRunSpeed: 4
   wishJumpExpirationDuration: 0
   fallScale: 2.5
   hitStunTime: 0.5

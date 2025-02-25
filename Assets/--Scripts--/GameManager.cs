@@ -76,12 +76,12 @@ public class GameManager : MonoBehaviour
      */
     private void LoadTopPlayer(GameObject player)
     {
-            GameObject playerObj = Instantiate(characterList[nextPlayeridx], spawnpoint.transform.position, Quaternion.identity,
+        GameObject playerObj = Instantiate(characterList[nextPlayeridx], spawnpoint.transform.position, Quaternion.identity,
             player.transform);
+            
+        nextPlayeridx++;
         
         playerObj.GetComponent<PlayerController>().PlayerID = nextPlayeridx;
-        
-        nextPlayeridx++;
         
         players.Add(player.GetComponent<PlayerInput>());
         

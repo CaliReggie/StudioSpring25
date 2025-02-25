@@ -312,18 +312,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f444898376e64c64b87beb9c40e4b430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  addPlayerUIGroups: 0
-  playerCount: 1
-  removePlayerUIGroups: 0
-  targetUpdateGroup: 1
-  targetPlayerIconColor: {r: 1, g: 1, b: 1, a: 1}
-  attackIconAvailable: 1
-  attackLevelUpFillAmount: 0.5
-  flyIconAvailable: 1
-  flyLevelUpFillAmount: 0.5
-  runIconAvailable: 1
-  runLevelUpFillAmount: 0.5
-  staminaFillAmount: 0.5
-  updateTargetGroup: 0
+  playerColors:
+  - {r: 0.25943398, g: 0.3959305, b: 1, a: 1}
+  - {r: 1, g: 0.16470587, b: 0.39415136, a: 1}
+  - {r: 0.5450344, g: 1, b: 0.2216981, a: 1}
+  - {r: 0.9610253, g: 1, b: 0.2028302, a: 1}
   playerUIGroupHolder: {fileID: 8286668759304651951}
   playerUIGroupPrefab: {fileID: 3069061437465928200, guid: 41c7ddcf12b666f449c71009ecf14046, type: 3}

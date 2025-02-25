@@ -11,6 +11,9 @@ public class UIManager : MonoBehaviour
     [Header("Player UI")]
     
     [SerializeField]
+    private List<Color> playerColors;
+    
+    [SerializeField]
     private GameObject playerUIGroupHolder;
     
     [SerializeField]
@@ -129,6 +132,8 @@ public class UIManager : MonoBehaviour
             GameObject playerUIGroup = Instantiate(playerUIGroupPrefab, playerUIGroupHolder.transform);
             
             PlayerUIGroups[i] = playerUIGroup.GetComponent<PlayerUIGroup>();
+            
+            PlayerUIGroups[i].SetPlayerColor(playerColors[i]);
         }
     }
     

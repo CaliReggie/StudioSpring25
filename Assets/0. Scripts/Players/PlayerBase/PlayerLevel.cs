@@ -28,48 +28,25 @@ public class PlayerLevel : MonoBehaviour
     }
     
     #region Public Methods
-    public void AddAtkXP(int amount)
+    public void AddAtkXP(int addAmount)
     {
-        /*atkXP+=amount;
-        if (atkXP >= atkLevelThreshold)
-        {
-            // Increase level and reset atk XP
-            atkXP -= atkLevelThreshold;
-            atkLevel++;
-            // Update UI
-            
-            // Increase stamina
-            
-        }
-        UIManager.Instance.UpdateStaminaIcon(_pc.PlayerID, (float)atkXP / atkLevelThreshold);*/
-        AddCriteriaXP(amount, ref atkLevel, ref atkXP, atkLevelThreshold,
-            () => _pc.AddSpeed(runAddAmount),  // TODO: UPDATE ME!
-            amount => UIManager.Instance.UpdateStaminaIcon(playerNum:_pc.PlayerID, fillAmount: amount));
+        AddCriteriaXP(addAmount, ref atkLevel, ref atkXP, atkLevelThreshold,
+            () => _pc.AddAttack(1),  // TODO: UPDATE ME!
+            amount => UIManager.Instance.UpdateAttackIcon(_pc.PlayerID, true, amount));
     }
     
-    public void AddRunXP(int amount )
+    public void AddRunXP(int addAmount )
     {
-        /*speedXP += amount;
-        if (speedXP >= speedLevelThreshold)
-        {
-            // Increase level and reset speed XP
-            speedXP -= speedLevelThreshold;
-            speedLevel++;
-            
-            // Increase speed
-            _pc.AddSpeed(speedAddAmount);
-        }
-        UIManager.Instance.UpdateStaminaIcon(_pc.PlayerID, (float)speedXP / speedLevelThreshold);*/
-        AddCriteriaXP(amount, ref runLevel, ref runXP, runLevelThreshold,
-            () => _pc.AddSpeed(runAddAmount), 
-            amount => UIManager.Instance.UpdateRunIcon(playerNum:_pc.PlayerID,true, fillAmount: amount));
+        AddCriteriaXP(addAmount, ref runLevel, ref runXP, runLevelThreshold,
+            () => _pc.AddSpeed(1), 
+            amount => UIManager.Instance.UpdateRunIcon(_pc.PlayerID,true, amount));
     }
 
-    public void AddFlyXP(int amount)
+    public void AddFlyXP(int addAmount)
     {
-        AddCriteriaXP(amount, ref flyLevel, ref flyXP, flyLevelThreshold,
-            () => _pc.AddSpeed(runAddAmount), // TODO: UPDATE ME!
-            amount => UIManager.Instance.UpdateFlyIcon(playerNum:_pc.PlayerID, true, fillAmount: amount));
+        AddCriteriaXP(addAmount, ref flyLevel, ref flyXP, flyLevelThreshold,
+            () => _pc.AddJumpHeight(1), // TODO: UPDATE ME!
+            amount => UIManager.Instance.UpdateFlyIcon(_pc.PlayerID, true, amount));
     }
     #endregion
     
