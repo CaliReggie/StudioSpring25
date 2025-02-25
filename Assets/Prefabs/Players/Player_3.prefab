@@ -314,7 +314,7 @@ MonoBehaviour:
   isAlwaysInvincible: 0
   flashSpeed: 10
   flashColor: {r: 1, g: 1, b: 1, a: 0.3254902}
-  useLives: 1
+  useLives: 0
   curLives: 2
   maxLives: 2
   respawnTime: 1

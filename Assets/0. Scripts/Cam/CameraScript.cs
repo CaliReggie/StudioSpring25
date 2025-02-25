@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Serialization;
+using Debug = UnityEngine.Debug;
 
 public class CameraScript : MonoBehaviour
 {
@@ -20,12 +24,22 @@ public class CameraScript : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI stateText;
     
+    [Header("Player Management")]
+    
+    public List<GameObject> playersHit = new List<GameObject>();
+    
+    public Transform pos1Respawn;
+    
+    public Transform pos2Respawn;
+    
     
     [Header("TargetPositions")]
     public Transform pos1;
     public Transform pos2;
     Vector3 targetPosition;
-    public float moveSpeed = 10f;
+    public float firstMoveSpeed = 10f;
+
+    public float secondMoveSpeed = 20f;
     public Collider2D colliderTop;
     public Collider2D colliderLeft;
     public Collider2D colliderRight;
@@ -68,15 +82,63 @@ public class CameraScript : MonoBehaviour
         
         camState = eCamState.MoveToPos1;
         
-        //wait until trigger state
-        yield return new WaitUntil(() => camState == eCamState.StaticUnsafe);
+        //wait until static state
+        yield return new WaitUntil(() => camState == eCamState.StaticSafe);
+        
+        //reset the players
+        Pos1Respawn();
         
         yield return new WaitForSeconds(timeWaitBeforeMoveFromStatic);
         
         camState = eCamState.MoveToPos2;
+        
+        //wait until trigger state
+        yield return new WaitUntil(() => camState == eCamState.StaticUnsafe);
+        
+        //reset the players
+        Pos2Respawn();
+        
+        //done!
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Player hit");
+            
+            if (!playersHit.Contains(other.gameObject))
+            {
+                playersHit.Add(other.gameObject);
+                
+                //turn off player
+                other.gameObject.SetActive(false);
+            }
+        }
     }
     
+    private void Pos1Respawn()
+    {
+        foreach (var player in playersHit)
+        {
+            player.transform.position = pos1Respawn.position;
+            player.SetActive(true);
+        }
+        
+        playersHit.Clear();
+    }
     
+    private void Pos2Respawn()
+    {
+        foreach (var player in playersHit)
+        {
+            player.transform.position = pos2Respawn.position;
+            player.SetActive(true);
+        }
+        
+        playersHit.Clear();
+    }
+
     void Update()
     {
        CamBehaviour(); 
@@ -108,7 +170,7 @@ public class CameraScript : MonoBehaviour
                 
             colliderDown.isTrigger = true;
             targetPosition = pos1.position;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetPosition.x,targetPosition.y,-10), moveSpeed*Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetPosition.x,targetPosition.y,-10), firstMoveSpeed*Time.deltaTime);
 
             if (transform.position == targetPosition)
                 camState = eCamState.StaticSafe;
@@ -119,7 +181,7 @@ public class CameraScript : MonoBehaviour
             colliderLeft.isTrigger = true;
             colliderDown.isTrigger = true;
             targetPosition = pos2.position;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetPosition.x,targetPosition.y,-10), moveSpeed*Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetPosition.x,targetPosition.y,-10), secondMoveSpeed*Time.deltaTime);
             if (transform.position == targetPosition)
             camState = eCamState.StaticUnsafe;
             break;
