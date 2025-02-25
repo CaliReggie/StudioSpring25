@@ -9,9 +9,6 @@ using UnityEngine.SocialPlatforms.Impl;
 public class GameManager : MonoBehaviour
 {
     public static GameManager S;
-
-    [Header("Inscribed")]
-    public GameObject playerPrefab;
     
     //public on player joined event for things to sub to
     public event Action<int> PlayerJoined;
@@ -23,28 +20,15 @@ public class GameManager : MonoBehaviour
     static public float DIFFSPEED = 1f;
     private float difficultyMax;
     static public Rect CAMERA_BOUNDS;
-
-    [SerializeField] private bool broadcastPlayerJoined = false;
-    
-    [Range(1,4)] [SerializeField] private int broadcastPlayerNum = 1;
     
     [Header("List of characters to choose from")]
-    [SerializeField] private List<PlayerScriptableObject> characterList;
+    [SerializeField] private List<GameObject> characterList;
     private int nextPlayeridx = 0;
     
     [SerializeField] private GameObject spawnpoint;
     private Vector3 spawnpointPos;
     
     #region Unity Events
-    private void OnValidate()
-    {
-        if (broadcastPlayerJoined)
-        {
-            broadcastPlayerJoined = false;
-            
-            BroadcastPlayerJoined(broadcastPlayerNum);
-        }
-    }
 
     private void Awake()
     {
@@ -92,13 +76,16 @@ public class GameManager : MonoBehaviour
      */
     private void LoadTopPlayer(GameObject player)
     {
-        player.transform.position = spawnpointPos;
-        // Prevent getting non existing character data.
-        // Also increment the index. Since ++ still returns the previous number it will work
-        player.GetComponent<PlayerController>().PlayerStats = characterList[nextPlayeridx++ % characterList.Count];
-        BroadcastPlayerJoined(nextPlayeridx);
-        player.GetComponent<PlayerController>().PlayerID = nextPlayeridx;
+        GameObject playerObj = Instantiate(characterList[nextPlayeridx], spawnpoint.transform.position, Quaternion.identity,
+            player.transform);
+        
+        playerObj.GetComponent<PlayerController>().PlayerID = nextPlayeridx;
+        
+        nextPlayeridx++;
+        
         players.Add(player.GetComponent<PlayerInput>());
+        
+        BroadcastPlayerJoined(nextPlayeridx);
     }
 
 

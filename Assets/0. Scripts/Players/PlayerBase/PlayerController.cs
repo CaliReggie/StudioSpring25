@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _input = GetComponent<PlayerInput>();
+        _input = GetComponentInParent<PlayerInput>();
         _sColl = GetComponent<Collision>();
         _sAnim = GetComponentInChildren<AnimationScript>();
         _health = GetComponent<Health>();
@@ -137,6 +137,7 @@ public class PlayerController : MonoBehaviour
         _abilityAction.performed += OnExecuteMove;
         
         _moveAction = _input.actions["Move"];
+        _moveAction.Enable();
         _moveAction.started += OnMovement;
         _moveAction.canceled += OnMovement;
 
@@ -187,6 +188,7 @@ public class PlayerController : MonoBehaviour
         _jumpAction.performed -= OnJump;
         _moveAction.started -= OnMovement;
         _moveAction.canceled -= OnMovement;
+        _moveAction.Disable();
         _health.OnTakeDamage -= OnTakeDamage;
         _health.OnDespawn -= OnDespawn;
        // _health.OnRespawn -= OnRespawn;

@@ -16,7 +16,7 @@ MonoBehaviour:
     heroName: frog
     jmpLimit: 2
     walkSpeed: 5
-    jmpHeight: 9
+    jmpHeight: 7
     djmpHeight: 7
     jmpGravScale: 0.75
     animOverride: {fileID: 22100000, guid: 859a2c27c346e914383cbf6a1b119e6c, type: 2}

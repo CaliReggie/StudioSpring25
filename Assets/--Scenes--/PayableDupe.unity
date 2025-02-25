@@ -231,42 +231,11 @@ MonoBehaviour:
   pos1: {fileID: 1156644900}
   pos2: {fileID: 1663448715}
   moveSpeed: 1
-  colliderTop: {fileID: 381956642}
-  colliderLeft: {fileID: 2031231036}
-  colliderRight: {fileID: 1408358312}
-  colliderDown: {fileID: 1610544789}
+  colliderTop: {fileID: 0}
+  colliderLeft: {fileID: 0}
+  colliderRight: {fileID: 0}
+  colliderDown: {fileID: 0}
   camState: 0
---- !u!1 &349245537
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 349245538}
-  m_Layer: 0
-  m_Name: PlayerSpawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &349245538
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349245537}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -11.46, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &381956639
 GameObject:
   m_ObjectHideFlags: 0
@@ -14953,12 +14922,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58287445a52457443a750316dcaa5dbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterList:
-  - {fileID: 1810743968341179908, guid: 6f975df2156312f438854e02de9672fb, type: 3}
-  - {fileID: 2938394773793268152, guid: 96649bff45d5b124c9fc685702938e1d, type: 3}
-  - {fileID: 3141807054732225201, guid: 31e03ed5dcd10304785bb63e114d535d, type: 3}
-  - {fileID: 1147220888705904706, guid: a508bd4828c0ee34d99a84dbffb5ecba, type: 3}
-  spawnpoint: {fileID: 349245537}
+  playerPrefab: {fileID: 5482475926532644464, guid: a04a02b92ca9cc248b7ee155ef528115, type: 3}
+  broadcastPlayerJoined: 0
+  broadcastPlayerNum: 1
+  characterList: []
+  spawnpoint: {fileID: 0}
 --- !u!114 &1818167267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14993,7 +14961,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 8641948152073482010, guid: f00625b9d5c98ea4daa173af773cc658, type: 3}
+  m_PlayerPrefab: {fileID: 5482475926532644464, guid: a04a02b92ca9cc248b7ee155ef528115, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -15105,4 +15073,3 @@ SceneRoots:
   - {fileID: 1669757154}
   - {fileID: 1156644900}
   - {fileID: 1663448715}
-  - {fileID: 349245538}
