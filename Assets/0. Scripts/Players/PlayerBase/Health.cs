@@ -142,7 +142,6 @@ public class Health : MonoBehaviour
     {
         if (isInvincible) return;
         // if not invincible right now
-        Debug.Log("Taking damage!");
         currentHealth -= amount;
         if (CheckDeath() == false) // if not despawning
         {

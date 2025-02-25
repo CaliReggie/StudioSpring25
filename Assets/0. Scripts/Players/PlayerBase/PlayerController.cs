@@ -286,9 +286,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private IEnumerator PerformTakeDamage()
     {
-        
-        
-        Debug.Log("Player: Taking damage");
         // Change animation
         // _sAnim.SetTrigger("damaged");
         
@@ -312,7 +309,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void OnDespawn()
     {
-        Debug.Log("Despawning");
         // Knockback
         _rb.velocity = new Vector2(-hitStunForce * direction, hitStunForce);
         FreezeMovement();
@@ -352,11 +348,6 @@ public class PlayerController : MonoBehaviour
         djmpHeight = Stats.PlayerStats.djmpHeight;
         jmpGravScale = Stats.PlayerStats.jmpGravScale;
         // _sAnim.ChangeAnim(Stats.PlayerStats.animOverride);
-        Debug.Log("Stats: " +
-                  "jmpLimit: " + jmpLimit + "\n" +
-                  "wishVel_x: " + wishVel_x + "\n" +
-                  "jmpHeight: " + jmpHeight + "\n"
-        );
     }
     /// <summary>
     ///  Manage state transitions
@@ -430,7 +421,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private IEnumerator HandleSpawning()
     {
-        Debug.Log("Spawning");
         FreezeMovement();
         SpawnSFX.PlaySound();
         // Trigger the animation
@@ -593,7 +583,6 @@ public class PlayerController : MonoBehaviour
         wishVel_x += speedAdded;
         // Update UI
         // Percentage based on the init value
-        Debug.Log($"Updated speed to: {((wishVel_x - _initSpeed)/_initSpeed).ToString()}");
         //UIManager.Instance.PlayerUIGroups[PlayerID].UpdateStaminaIcon((wishVel_x - _initSpeed)/_initSpeed);
     }
     

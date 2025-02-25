@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 520056012615819418}
   allTilePos: []
-  destroyTime: 0.2
+  destroyTime: 1
 --- !u!1 &4590695341026984636
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,12 +16,7 @@ public class TilemapDestroy : MonoBehaviour
         GetTiles();
         //StartCoroutine(DestroyTiles());
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
     void GetTiles()
     {
         BoundsInt boundsInt = tilemap.cellBounds;
@@ -34,8 +29,13 @@ public class TilemapDestroy : MonoBehaviour
         }
 
     }
+    
+    public void StartDestroy()
+    {
+        StartCoroutine(DestroyTiles());
+    }
 
-    public IEnumerator DestroyTiles()
+    private IEnumerator DestroyTiles()
     {
         while (allTilePos.Count>0) 
         {

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum EPickupBuff
@@ -11,6 +12,8 @@ public class Pickup : MonoBehaviour
     [SerializeField] private EPickupBuff pickupBuff;
     
     [SerializeField] private int amount;
+    
+    [SerializeField] private GameObject pickupSound;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -33,6 +36,11 @@ public class Pickup : MonoBehaviour
                 case EPickupBuff.Attack:
                     player.AddAtkXP(amount);
                     break;
+            }
+            
+            if (pickupSound != null)
+            {
+                Instantiate(pickupSound, transform.position, Quaternion.identity);
             }
             
             Destroy(gameObject);

@@ -19,10 +19,9 @@ public class CameraScript : MonoBehaviour
     [SerializeField]
     private float timeWaitBeforeMoveFromStatic = 5f;
     
-    [Header("Display State Text")]
+    [Header("Management")]
     
-    [SerializeField]
-    private TextMeshProUGUI stateText;
+    public TilemapDestroy tilemapDestroy;
     
     [Header("Player Management")]
     
@@ -98,6 +97,11 @@ public class CameraScript : MonoBehaviour
         //reset the players
         Pos2Respawn();
         
+        if (tilemapDestroy != null)
+        {
+            tilemapDestroy.StartDestroy();
+        }
+        
         //done!
     }
 
@@ -105,8 +109,6 @@ public class CameraScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player hit");
-            
             if (!playersHit.Contains(other.gameObject))
             {
                 playersHit.Add(other.gameObject);
@@ -142,11 +144,6 @@ public class CameraScript : MonoBehaviour
     void Update()
     {
        CamBehaviour(); 
-       
-       if (stateText != null)
-       {
-           stateText.text = ( "State: " + camState);
-       }
     }
     void CamBehaviour()
     {
