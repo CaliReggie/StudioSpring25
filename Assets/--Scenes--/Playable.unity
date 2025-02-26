@@ -711,7 +711,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -809,8 +809,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d20180ac50c652429219d77ef755025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playersToStartMoving: 2
-  timeWaitBeforeMoveFromStatic: 10
+  playersToStartMoving: 3
+  timeWaitBeforeMoveFromStatic: 15
   tilemapDestroy: {fileID: 963199762}
   playersHit: []
   pos1Respawn: {fileID: 222868674}
@@ -949,7 +949,7 @@ GameObject:
   m_Component:
   - component: {fileID: 381956640}
   - component: {fileID: 381956642}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2954,7 +2954,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1243075211}
   - component: {fileID: 1243075212}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3069,7 +3069,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1408358310}
   - component: {fileID: 1408358312}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3559,7 +3559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1610544787}
   - component: {fileID: 1610544789}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4028,7 +4028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 0
-  m_MaxPlayerCount: 4
+  m_MaxPlayerCount: 3
   m_AllowJoining: 1
   m_JoinBehavior: 0
   m_PlayerJoinedEvent:
@@ -4297,7 +4297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2031231034}
   - component: {fileID: 2031231036}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
